@@ -7,7 +7,7 @@
 
 This code is built in Julia environment and calls Python 'pyquest' package.
 
-We build more features based on the original 'pyqyest': https://github.com/gmishne/pyquest
+We build more features for pyquest based on the original package: https://github.com/gmishne/pyquest
 
 This version of pyquest includes new features:
 - Cosine/Correlation Affinity
