@@ -9,14 +9,12 @@ This code is built in Julia environment and calls Python 'pyquest' package.
 
 We build more features based on the original 'pyqyest': https://github.com/gmishne/pyquest
 
-This version of pyquest includes:
+This version of pyquest includes new features:
 - Cosine/Correlation Affinity
 - multi-scale Cosine/Correlation Affinity
 - Landmark diffusion map 
 
 ## SETUP
-
-
 Download and install the package as follows in Julia.
 
 ```julia
@@ -25,7 +23,6 @@ Pkg.activate("path/to/QuestionnaireFastTransform") # change the path here in you
 using QuestionnaireFastTransform
 ```
 Also, make sure `numpy` is installed in the system.
-
 ```julia
 ENV["PYTHON"] = ""
 using Pkg
