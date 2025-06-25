@@ -11,7 +11,7 @@ We build more features for pyquest based on the original package: https://github
 
 New features include:
 - Cosine/Correlation Affinity
-- multi-scale Cosine/Correlation Affinity
+- Multiscale Cosine/Correlation Affinity
 - Landmark diffusion map 
 - Matrix reoganization by a space-filling curve
 ## SETUP
