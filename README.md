@@ -10,11 +10,9 @@ This code is built in Julia environment and calls Python 'pyquest' package.
 We build more features based on the original 'pyqyest': https://github.com/gmishne/pyquest
 
 This version of pyquest includes:
-## Cosine/Correlation Affinity
-## multi-scale Cosine/Correlation Affinity
-## Landmark diffusion map
-
-The pyquest code is under the folder src 
+- Cosine/Correlation Affinity
+- multi-scale Cosine/Correlation Affinity
+- Landmark diffusion map 
 
 ## SETUP
 
