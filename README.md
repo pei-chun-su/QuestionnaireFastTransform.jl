@@ -5,9 +5,17 @@
 [![Build Status](https://github.com/MagineZ/QuestionnaireFastTransform.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/MagineZ/QuestionnaireFastTransform.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Coverage](https://codecov.io/gh/MagineZ/QuestionnaireFastTransform.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/MagineZ/QuestionnaireFastTransform.jl)
 
-## Python Dependencies
+This code is built in a Julia environment and calls the pyquest package from Python.
+## Install
+Download and install the package as follows in Julia.
 
-This package requires Python packages:
+```julia
+using Pkg
+Pkg.activate("path/to/QuestionnaireFastTransform") # change the path here in your local PC
+using QuestionnaireFastTransform
+'''
+
+## Python Dependencies
 
 - `numpy`
 
