@@ -22,7 +22,7 @@ using Pkg
 Pkg.activate("path/to/QuestionnaireFastTransform") # change the path here in your local PC
 using QuestionnaireFastTransform
 ```
-Also, make sure that the required Python packages are installed in the Conda.
+Also, make sure that the required Python packages are installed in Conda.
 ```julia
 ENV["PYTHON"] = ""
 using Pkg
