@@ -39,6 +39,6 @@ Conda.add("numpy")
 
 - G. Mishne, R. Talmon, R. Meir, J. Schiller, U. Dubin and R. R. Coifman, "Hierarchical Coupled Geometry Analysis for Neuronal Structure and Activity Pattern Discovery," IEEE Journal of Selected Topics in Signal Processing, vol. 10, no. 7, pp. 1238-1253, Oct. 2016.
 
--J. I. Ankenman, “Geometry and analysis of dual networks on questionnaires,” Ph.D. dissertation, Yale University, 2014.
+- J. I. Ankenman, “Geometry and analysis of dual networks on questionnaires,” Ph.D. dissertation, Yale University, 2014.
 
 - M. O'Neil, F. Woolfe and V. Rokhlin, "An Algorithm for the Rapid Evaluation of Special Function Transforms," *Applied and Computational Harmonic Analysis*, vol. 28, no. 2, pp. 203–226, 2010.
