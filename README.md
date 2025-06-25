@@ -13,7 +13,7 @@ This version of pyquest includes new features:
 - Cosine/Correlation Affinity
 - multi-scale Cosine/Correlation Affinity
 - Landmark diffusion map 
-
+- Matrix Reoganization by a space-filling curve
 ## SETUP
 Download and install the package as follows in Julia.
 
