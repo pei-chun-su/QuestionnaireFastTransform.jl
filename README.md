@@ -5,7 +5,7 @@
 [![Build Status](https://github.com/MagineZ/QuestionnaireFastTransform.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/MagineZ/QuestionnaireFastTransform.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Coverage](https://codecov.io/gh/MagineZ/QuestionnaireFastTransform.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/MagineZ/QuestionnaireFastTransform.jl)
 
-This code is built in Julia environment and calls Python 'pyquest' package.
+This code is built in Julia environment and calls Python 'pyquest' package through 'PyCall' and 'Conda' package of Julia.
 
 We build more features for pyquest based on the original package: https://github.com/gmishne/pyquest
 
@@ -22,13 +22,15 @@ using Pkg
 Pkg.activate("path/to/QuestionnaireFastTransform") # change the path here in your local PC
 using QuestionnaireFastTransform
 ```
-Also, make sure `numpy` is installed in the system.
+Also, make sure that the required Python packages are installed in the Conda.
 ```julia
 ENV["PYTHON"] = ""
 using Pkg
 Pkg.build("PyCall")
 using Conda
 Conda.add("numpy")
+Conda.add("scipy")
+Conda.add("scikit-learn")
 ```
 ## Reference
 - P.-C. Su and R. R. Coifman, "Learning the Analytic Geometry of Transformations to Achieve Efficient Computation," arXiv preprint arXiv:2506.11990, 2025.
