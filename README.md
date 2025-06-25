@@ -9,7 +9,7 @@ This code is built in Julia environment and calls Python 'pyquest' package throu
 
 We build more features for pyquest based on the original package: https://github.com/gmishne/pyquest
 
-This version of pyquest includes new features:
+New features include:
 - Cosine/Correlation Affinity
 - multi-scale Cosine/Correlation Affinity
 - Landmark diffusion map 
