@@ -29,7 +29,7 @@ using Pkg
 Pkg.build("PyCall")
 using Conda
 Conda.add("numpy")
-
+```
 ## Reference
 - P.-C. Su and R. R. Coifman, "Learning the Analytic Geometry of Transformations to Achieve Efficient Computation," arXiv preprint arXiv:2506.11990, 2025.
 
