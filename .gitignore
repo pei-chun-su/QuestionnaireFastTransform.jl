@@ -1,5 +1,33 @@
-*.jl.*.cov
-*.jl.cov
-*.jl.mem
-/docs/Manifest*.toml
-/docs/build/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.so
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data files (large)
+*.npz
+*.pkl
+*.npy
+*.h5
+*.hdf5
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Virtual environments
+venv/
+.venv/
+env/
