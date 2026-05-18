@@ -136,9 +136,33 @@ python examples/helmholtz_kernel.py --sizes 256 512 1024 2048 4096 --method butt
 python examples/helmholtz_kernel.py --sizes 1024 2048 4096 --gpu
 ```
 
+### DST-IV: Geometry Discovery over 10 Iterations
+
+The Questionnaire algorithm progressively discovers the row and column geometry of the DST-IV kernel `K(k, x_i) = sin(pi * (k-0.5) * (i-0.5) / N)` from a randomly permuted matrix. The reorganized matrix reveals the analytic structure over iterations:
+
+![DST-IV reorganization over 10 iterations](figures/sin_reorganize_10.png)
+
+Row embedding (frequency domain) across iterations — the algorithm recovers the sinusoidal structure:
+
+![DST-IV row embeddings](figures/sin_rowemd_10.png)
+
+Column embedding (spatial domain) across iterations:
+
+![DST-IV column embeddings](figures/sin_colemd_10.png)
+
+### Helmholtz Kernel: Geometry Setup
+
+The Helmholtz kernel `K(x,y) = cos(2*pi*||x-y||) / ||x-y||` models acoustic wave interactions between a 3D spiral (blue) and a thin plane (red). **Left**: the two point clouds. **Middle/Right**: the Questionnaire discovers the clustering structure from the kernel entries alone, coloring points by learned tree ordering:
+
+![Helmholtz geometry and clustering](figures/spiral_plane.png)
+
+Before and after reorganization — the randomly permuted matrix (left) is transformed into a structured, compressible form (right):
+
+![Helmholtz before/after reorganization](figures/potential_matrix.png)
+
 ### Expected Results
 
-Results from [Su & Coifman (2025)](https://arxiv.org/abs/2506.11990), Tables 2-3. All entries stored in Float64. Questionnaire parallelized across 6 NVIDIA RTX A4500 GPUs; all other algorithms single-threaded CPU.
+Results from [Su & Coifman (2025)](https://arxiv.org/abs/2506.11990), Tables 1-3. All entries stored in Float64. Questionnaire parallelized across 6 NVIDIA RTX A4500 GPUs; all other algorithms single-threaded CPU.
 
 #### DST-IV: `K(k, x_i) = sin(pi * (k-0.5) * (i-0.5) / N)`
 
