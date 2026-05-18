@@ -156,9 +156,9 @@ The Helmholtz kernel `K(x,y) = cos(2*pi*||x-y||) / ||x-y||` models acoustic wave
 
 ![Helmholtz geometry and clustering](figures/spiral_plane.png)
 
-Before and after reorganization — the randomly permuted matrix (left) is transformed into a structured, compressible form (right):
+Before and after reorganization — the randomly permuted Helmholtz kernel (left) is transformed into a structured, compressible form revealing oscillatory wave patterns (right):
 
-![Helmholtz before/after reorganization](figures/potential_matrix.png)
+![Helmholtz before/after reorganization](figures/acoustic_matrix1.png)
 
 ### Expected Results
 
