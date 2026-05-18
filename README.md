@@ -162,7 +162,7 @@ Before and after reorganization — the randomly permuted Helmholtz kernel (left
 
 ### Expected Results
 
-Results from [Su & Coifman (2025)](https://arxiv.org/abs/2506.11990), Tables 1-3. All entries stored in Float64. Questionnaire parallelized across 6 NVIDIA RTX A4500 GPUs; all other algorithms single-threaded CPU.
+Results from [Su & Coifman (2026)](https://arxiv.org/abs/2506.11990), Tables 1-3. All entries stored in Float64. Questionnaire parallelized across 6 NVIDIA RTX A4500 GPUs; all other algorithms single-threaded CPU.
 
 #### DST-IV: `K(k, x_i) = sin(pi * (k-0.5) * (i-0.5) / N)`
 
@@ -284,7 +284,7 @@ Complexity: O(N log N) for mat-vec (vs. O(N^2) direct). Construction cost is O(N
 
 ## References
 
-- P.-C. Su and R. R. Coifman, "Extracting Dual Analytic Geometries of Linear Transformations to Achieve Efficient Computation," arXiv:2506.11990, 2025.
+- P.-C. Su and R. R. Coifman, "Extracting Dual Analytic Geometries of Linear Transformations to Achieve Efficient Computation," arXiv:2506.11990, 2026.
 - N. Saito and Y. Shao, "eGHWT: The Extended Generalized Haar-Walsh Transform," Journal of Mathematical Imaging and Vision, vol. 64, 2022.
 - G. Mishne, R. Talmon, I. Cohen, R. R. Coifman and Y. Kluger, "Data-Driven Tree Transforms and Metrics," IEEE Transactions on Signal and Information Processing over Networks, vol. 4, 2017.
 - G. Mishne, R. Talmon, R. Meir, J. Schiller, U. Dubin and R. R. Coifman, "Hierarchical Coupled Geometry Analysis for Neuronal Structure and Activity Pattern Discovery," IEEE JSTSP, vol. 10, no. 7, pp. 1238-1253, Oct. 2016.
