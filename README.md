@@ -138,29 +138,31 @@ python examples/helmholtz_kernel.py --sizes 1024 2048 4096 --gpu
 
 ### Expected Results
 
-Butterfly compression (acc=1e-10):
+Results from [Su & Coifman (2025)](https://arxiv.org/abs/2506.11990), Tables 2-3. All entries stored in Float64. Questionnaire parallelized across 6 NVIDIA RTX A4500 GPUs; all other algorithms single-threaded CPU.
 
-| N | Questionnaire | Butterfly Compress | Butterfly Mat-Vec | Direct Mat-Vec | Rel. Error |
-|---|---|---|---|---|---|
-| 2^9 | 1.4s | 0.1s | 0.0002s | 0.00005s | ~1e-10 |
-| 2^10 | 56s | 0.5s | 0.0007s | 0.0002s | ~1e-10 |
-| 2^11 | 88s | 1.6s | 0.0004s | 0.004s | ~1e-10 |
-| 2^12 | 274s | 4.9s | 0.001s | 0.025s | ~1e-10 |
-| 2^13 | 1139s | 22s | 0.004s | 0.084s | ~1e-10 |
-| 2^14 | 7893s | 77s | 0.018s | 0.906s | ~1e-10 |
-| 2^15 | 29143s | 301s | — | — | ~1e-10 |
+#### DST-IV: `K(k, x_i) = sin(pi * (k-0.5) * (i-0.5) / N)`
 
-Walsh compression (acc=1e-3):
+| N | Direct (s) | Quest. (s) | BF Prep (s) | BF Memory (MiB) | BF Mat-Vec (s) | BF Error | eGHWT Prep (s) | eGHWT Memory (MiB) | eGHWT Mat-Vec (s) | eGHWT Error |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1024 | 5.71E-4 | 89 | 1.4 | 6.59 | 1.05E-3 | 9.42E-12 | 29.8 | 10.0 | 0.176 | 3.92E-2 |
+| 2048 | 6.86E-3 | 115 | 9.24 | 20.6 | 2.45E-3 | 2.09E-11 | 177 | 38.3 | 0.969 | 4.92E-2 |
+| 4096 | 1.66E-2 | 276 | 189 | 63.2 | 8.60E-3 | 1.54E-11 | 730 | 158 | 3.61 | 4.92E-2 |
+| 8192 | 6.80E-2 | 1050 | 570 | 150 | 1.82E-2 | 1.45E-11 | 4310 | 638 | 14.0 | 4.97E-2 |
+| 16384 | 0.33 | 4470 | 1530 | 426 | 3.71E-2 | 1.12E-11 | 22800 | 1980 | 43.3 | 4.70E-2 |
+| 32768 | 1.29 | 13000 | 4030 | 1450 | 6.24E-2 | 1.75E-11 | — | — | — | — |
 
-| N | Walsh Compress | Walsh Mat-Vec | Rel. Error |
-|---|---|---|---|
-| 2^10 | 32s | 0.35s | ~3e-4 |
-| 2^11 | 172s | 0.98s | ~2e-4 |
-| 2^12 | 738s | 2.4s | ~2e-4 |
-| 2^13 | 3790s | 5.4s | ~1e-4 |
-| 2^14 | 22696s | 11.4s | ~1e-4 |
+#### Helmholtz kernel: `K(x, y) = cos(2*pi*||x-y||) / ||x-y||`
 
-**Note**: Butterfly achieves machine-precision accuracy (1e-10) with much faster mat-vec times. Walsh achieves moderate accuracy with a sparser representation and is more suited for lossy compression scenarios.
+| N | Direct (s) | Quest. (s) | BF Prep (s) | BF Memory (MiB) | BF Mat-Vec (s) | BF Error | eGHWT Prep (s) | eGHWT Memory (MiB) | eGHWT Mat-Vec (s) | eGHWT Error |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1024 | 9.14E-4 | 56.1 | 0.485 | 3.99 | 4.61E-4 | 2.43E-11 | 31.8 | 13.2 | 0.353 | 2.89E-4 |
+| 2048 | 6.08E-3 | 87.8 | 1.55 | 9.93 | 1.96E-3 | 2.67E-11 | 172 | 38.1 | 0.981 | 2.07E-4 |
+| 4096 | 2.56E-2 | 274 | 4.94 | 20.4 | 3.78E-3 | 2.27E-11 | 738 | 94.0 | 2.36 | 1.61E-4 |
+| 8192 | 8.13E-2 | 1140 | 22.2 | 56.0 | 8.02E-3 | 2.71E-11 | 3790 | 219 | 5.41 | 1.37E-4 |
+| 16384 | 0.333 | 2670 | 76.8 | 168 | 1.62E-2 | 2.66E-11 | 22700 | 448 | 11.4 | 1.23E-4 |
+| 32768 | 1.32 | 16000 | 301 | 574 | 3.79E-2 | 2.28E-11 | — | — | — | — |
+
+**Butterfly** achieves machine-precision accuracy (~1e-11) with O(N log N) mat-vec. **eGHWT** achieves moderate accuracy (~1e-4) with a sparser representation; its best-basis selection requires O(N^2 (log N)^2) memory, limiting scalability beyond N=16384.
 
 ## Library Structure
 
