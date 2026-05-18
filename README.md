@@ -24,7 +24,7 @@ Input matrix A (N x N, unknown row/column ordering)
         |
         v
   [1] Questionnaire algorithm
-      - Cosine/Gaussian affinity -> binary tree -> EMD dual affinity
+      - Cosine/Gaussian affinity -> binary/flexible tree -> EMD dual affinity
       - Iterates between row and column geometry
       - Discovers hierarchical row tree T_r and column tree T_c
         |
@@ -223,7 +223,7 @@ The GPU modules use [CuPy](https://cupy.dev/) for array operations and sparse li
 The questionnaire iterates between row and column geometry:
 
 1. Compute initial row affinity (cosine similarity or Gaussian kernel)
-2. Build row tree via spectral bisection
+2. Build row tree via spectral bisection (binary) or agglomerative clustering (flexible)
 3. Compute column affinity via Earth Mover's Distance using row tree
 4. Build column tree
 5. Compute row affinity via EMD using column tree
