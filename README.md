@@ -7,7 +7,7 @@ GPU-accelerated **Questionnaire algorithm** for hierarchical coupled geometry an
 > - **No Julia dependency** — runs anywhere with Python 3.8+ and NumPy/SciPy
 > - **GPU acceleration** — optional CuPy/PyTorch backend for multi-GPU affinity and EMD (`questionnaire_gpu.py`)
 > - **Walsh (EGHWT) ported to Python** — the full 2D Extended Graph Haar-Walsh Transform (analysis, best-basis selection, synthesis, fast multiplication) previously only available in Julia's [MultiscaleGraphSignalTransforms.jl](https://github.com/UCD4IDS/MultiscaleGraphSignalTransforms.jl) is now implemented in `Walsh.py`
-> - **Butterfly factorization ported to Python** — hierarchical interpolative decomposition with fast O(N^{3/2}) operator application in `Butterfly.py`
+> - **Butterfly factorization ported to Python** — hierarchical interpolative decomposition with O(N log N) operator application in `Butterfly.py`
 > - **Unified example script** — single CLI for Helmholtz kernel experiments with both Walsh and Butterfly, across multiple matrix sizes
 
 ## Overview
@@ -15,7 +15,7 @@ GPU-accelerated **Questionnaire algorithm** for hierarchical coupled geometry an
 Given an arbitrary matrix (e.g., a kernel matrix between two point clouds), the Questionnaire algorithm discovers the hidden geometric structure of its rows and columns through an iterative dual-affinity procedure. The learned hierarchical trees then enable two complementary compression strategies:
 
 - **Walsh (EGHWT)**: 2D best-basis selection on the Extended Graph Haar-Walsh Transform dictionary. Achieves sparse representation by selecting the most energy-efficient time-frequency atoms.
-- **Butterfly factorization**: Hierarchical interpolative decomposition (ID) on dyadic blocks induced by the row/column trees. Achieves near-optimal O(N^{3/2}) matrix-vector products.
+- **Butterfly factorization**: Hierarchical interpolative decomposition (ID) on dyadic blocks induced by the row/column trees. Achieves O(N log N) matrix-vector products.
 
 ### Pipeline
 
@@ -24,7 +24,7 @@ Input matrix A (N x N, unknown row/column ordering)
         |
         v
   [1] Questionnaire algorithm
-      - Cosine affinity -> binary tree -> EMD dual affinity
+      - Cosine/Gaussian affinity -> binary tree -> EMD dual affinity
       - Iterates between row and column geometry
       - Discovers hierarchical row tree T_r and column tree T_c
         |
@@ -222,7 +222,7 @@ The GPU modules use [CuPy](https://cupy.dev/) for array operations and sparse li
 
 The questionnaire iterates between row and column geometry:
 
-1. Compute initial row affinity (cosine similarity or Gaussian)
+1. Compute initial row affinity (cosine similarity or Gaussian kernel)
 2. Build row tree via spectral bisection
 3. Compute column affinity via Earth Mover's Distance using row tree
 4. Build column tree
@@ -247,7 +247,7 @@ Given row tree T_r and column tree T_c:
 3. **Levels 1..L**: Merge child skeletons, apply ID to merged block
 4. **Application**: Recursive back-substitution through the tree levels
 
-Complexity: O(N^{3/2}) for mat-vec (vs. O(N^2) direct).
+Complexity: O(N log N) for mat-vec (vs. O(N^2) direct). Construction cost is O(N^{3/2}).
 
 ### Walsh (EGHWT) Compression
 
