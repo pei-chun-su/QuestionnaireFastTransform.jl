@@ -17,7 +17,7 @@ perturbed folders equals averaging mat[b] (row p := mat[b[p]]) over the ORIGINAL
 import os, sys
 import numpy as np
 
-_PYQ = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "pyquest")
+_PYQ = os.path.dirname(os.path.abspath(__file__))
 if _PYQ not in sys.path:
     sys.path.insert(0, _PYQ)
 sys.modules.setdefault('cupy', np)                       # pyquest imports cupy; stub with numpy on CPU

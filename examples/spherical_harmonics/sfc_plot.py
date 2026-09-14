@@ -1,5 +1,6 @@
 """Sphere space-filling curve from the 2D questionnaire on X.X^T (version B). Loads compare_3d_vs_2d_data.npz."""
 import os, sys, numpy as np
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "pyquest"))
 import flip_questionnaire as FQ
 import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # noqa

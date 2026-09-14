@@ -5,6 +5,7 @@ projected into x_i's tangent plane. theta_ij = arccos<x_i,x_j>."""
 import os, sys, time, numpy as np
 from math import factorial, pi, sqrt
 import scipy.special as sp
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "pyquest"))
 import flip_questionnaire as FQ
 import questionnaire as Q
 import dual_affinity
