@@ -2,6 +2,7 @@
 degree l, signed m, |m| (meridians), l-|m| (parallels), and space-filling curve order.
 Replot from quest_B_L9_data.npz."""
 import os, sys, numpy as np
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "pyquest"))
 import flip_questionnaire as FQ
 import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
 import matplotlib as mpl

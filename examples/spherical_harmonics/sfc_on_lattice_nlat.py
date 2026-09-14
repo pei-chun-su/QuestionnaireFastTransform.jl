@@ -2,6 +2,7 @@
 drawn through them, and each node numbered by its SFC-order position. A = 3D questionnaire, B = 2D+EMD.
 l-|m| is constant along lattice anti-diagonals, so this shows whether the SFC path follows those bands."""
 import os, sys, numpy as np
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "pyquest"))
 import flip_questionnaire as FQ
 import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
 import matplotlib as mpl

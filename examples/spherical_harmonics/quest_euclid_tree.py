@@ -5,6 +5,7 @@ import os, sys, time, numpy as np
 from math import factorial, pi, sqrt
 import scipy.special as sp
 from scipy.spatial.distance import cdist
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "pyquest"))
 import flip_questionnaire as FQ
 import bin_tree_build, dual_affinity
 import warnings; warnings.filterwarnings("ignore")

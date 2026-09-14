@@ -2,6 +2,7 @@
 learned channel space-filling curve, and draw the curve's path through the lattice. Two panels:
   A = 3D-questionnaire channel SFC,  B = 2D-on-X.X-then-EMD channel SFC.  From compare_3d_vs_2d_data.npz."""
 import os, sys, numpy as np
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "pyquest"))
 import flip_questionnaire as FQ
 import matplotlib; matplotlib.use('Agg'); import matplotlib.pyplot as plt
 matplotlib.rcParams.update({'text.usetex': True, 'font.family': 'serif', 'text.latex.preamble': r'\usepackage{amsmath,amssymb}'})
