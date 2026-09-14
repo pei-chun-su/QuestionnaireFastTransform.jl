@@ -266,52 +266,26 @@ EMD(col_i, col_j) = sum over nodes v:
 
 where `w(v) = (|v|/N)^beta * 2^((1-level(v))*alpha)`.
 
-### Flip Perturbation, Initial Conditions & Convergence
+### Flip Perturbation
 
-`pyquest/flip_questionnaire.py` implements **Algorithm 3** of the paper — the questionnaire
-with a stochastic *flip perturbation* — together with the space-filling curve `curve_order`.
+`pyquest/flip_questionnaire.py` implements **Algorithm 3**. Every `tau` iterations it permutes
+a uniformly random half of each tree's leaves and holds the rest in place: the kept points
+stay on the smooth learned curves while the shuffled ones scatter, dislodging a weak fixed
+point (or periodic cycle) without discarding the structure already found. Because the two
+axes are refined in alternation, the perturbation propagates across the coupled geometry.
 
-**Initial conditions matter.** The iteration starts from a seed affinity `W_X^0`, and the
-limit it reaches depends on that seed. When an *informative* geometry is available — a
-cosine-similarity or Euclidean-distance affinity computed from the data — the iteration
-descends directly to a compressible fixed point. When the matrix offers *no* starting
-geometry (e.g. DST-IV, whose rows and columns are mutually orthogonal), one seeds instead
-with a Gaussian-random affinity: draw `z_i` i.i.d. from a standard Gaussian in R^10 and set
-`W_X^0(i,i') = exp(-||z_i - z_i'||^2 / sigma^2)`, with `sigma` the median pairwise distance.
+![Flip: kept leaves stay on the smooth DST-IV rows, a random half is shuffled](figures/flip_illustration.png)
 
-**Convergence is not what the affinity says.** The questionnaire map is discontinuous, so
-from a random seed different initializations behave very differently: some reach a good,
-compressible fixed point, others a *weak* fixed point (a far-from-smooth reorganization) or
-a short *periodic cycle*. Crucially, the decay of the affinity difference
-`||W^{t+1} - W^t||_inf` certifies **neither** convergence **nor** organization quality — only
-the downstream transform cost (eGHWT coefficient count, or Butterfly memory) does. The
-pipeline therefore (1) tracks the compression cost directly and keeps the most compressible
-iterate, and (2) applies the flip perturbation to escape weak limits.
+**Result.** The questionnaire map is discontinuous, so different random seeds `W_X^0` reach
+very different limits — and the affinity difference `||W^{t+1}-W^t||` certifies neither
+convergence nor quality; only the transform cost does. Run from 100 random seeds on a
+scrambled DST-IV with a flip every 20 iterations, each perturbation drops the iteration into
+a smoother, more compressible basin: the eGHWT-coefficient and Butterfly-memory curves fall
+in a sawtooth toward the natural DST-IV (dashed), and the final reorganizations recover
+coherent low-rank block structure from the scrambled input. With an informative seed the
+iteration descends directly and the flip can be switched off (`tau > T`).
 
-**The flip perturbation.** Every `tau` iterations, permute a uniformly random half of the
-leaves of the tree on each axis, holding the rest in place. The kept points stay on the
-smooth learned curves while the shuffled points scatter; because the two axes are refined in
-alternation, each perturbed tree induces a fresh dual affinity — and hence a fresh tree — on
-the other axis, so the flip propagates across the coupled geometry. Reshuffling only a
-fraction keeps the discovered coherence largely intact: the perturbation dislodges the
-current fixed point or cycle while *preserving* most of the structure already found, and the
-iteration re-descends from a different basin toward a smoother, more compressible
-organization. The perturbed fraction is free (we use one half). The flip is *optional*: with
-an informative seed, set `tau` larger than `T` to recover the raw questionnaire.
-
-```python
-from flip_questionnaire import flip_questionnaire   # with pyquest/ on sys.path
-
-res = flip_questionnaire(
-    K,             # matrix to reorganize
-    W_X0=None,     # seed column affinity (default: nonneg cosine of K.T). Use a
-                   #   Gaussian-random affinity when K offers no geometry (e.g. DST-IV).
-    T=200,         # iterations
-    tau=20,        # flip every tau iters; set tau > T to disable it (raw questionnaire)
-    frac=0.5,      # fraction of leaves reshuffled at each flip
-)
-row_order, col_order = res["row_order"], res["col_order"]   # learned space-filling curves
-```
+![100 random inits on scrambled DST-IV: eGHWT and Butterfly convergence (sawtooth = flips every 20 iters) and three reorganized fixed points](figures/questionnaire_perturbation.png)
 
 ### Butterfly Factorization
 
